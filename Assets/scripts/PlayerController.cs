@@ -6,10 +6,14 @@ using UnityEngine.Rendering;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float speed = 100;
+    [SerializeField] private Animator animator;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     private PlayerControls playerControls = null;
     private Rigidbody rb;
     private Vector3 movement;
+
+    private const string IS_WALK_PARAM = "IsWalking";
 
     private void Awake()
     {
@@ -46,6 +50,10 @@ public class PlayerController : MonoBehaviour
         float z = playerControls.Player.Move.ReadValue<Vector2>().y;
 
         movement = new Vector3 (x, 0, z).normalized;
+
+        animator.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
+
+        spriteRenderer.flipX = x < 0;
     }
 
     private void FixedUpdate()
