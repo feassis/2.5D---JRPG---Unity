@@ -5,7 +5,11 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float speed = 100;
+
     private PlayerControls playerControls = null;
+    private Rigidbody rb;
+    private Vector3 movement;
 
     private void Awake()
     {
@@ -22,6 +26,11 @@ public class PlayerController : MonoBehaviour
         playerControls.Enable();
     }
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private void OnDisable()
     {
         if (playerControls == null)
@@ -36,6 +45,11 @@ public class PlayerController : MonoBehaviour
         float x = playerControls.Player.Move.ReadValue<Vector2>().x;
         float z = playerControls.Player.Move.ReadValue<Vector2>().y;
 
-        Debug.Log($"({x} , {z})");
+        movement = new Vector3 (x, 0, z).normalized;
+    }
+
+    private void FixedUpdate()
+    {
+        rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
     }
 }
