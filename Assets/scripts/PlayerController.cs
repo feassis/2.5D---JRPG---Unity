@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,8 @@ using UnityEngine.Rendering;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 100;
+    [SerializeField] private float speed = 3;
+    [SerializeField] private float sprintSpeed = 5;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -14,11 +16,25 @@ public class PlayerController : MonoBehaviour
     private Vector3 movement;
 
     private const string IS_WALK_PARAM = "IsWalking";
+    private bool isRunning = false;
 
     private void Awake()
     {
         playerControls = new PlayerControls();
         playerControls.Enable();
+
+        playerControls.Player.Run.performed += ctx => OnRunningPressed();
+        playerControls.Player.Run.canceled += ctx => OnRunningCanceled();
+    }
+
+    private void OnRunningCanceled()
+    {
+        isRunning = false;
+    }
+
+    private void OnRunningPressed()
+    {
+        isRunning = true;
     }
 
     private void OnEnable()
@@ -58,6 +74,11 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(transform.position + movement * speed * Time.fixedDeltaTime);
+        rb.MovePosition(transform.position + movement * GetSpeed() * Time.fixedDeltaTime);
+    }
+
+    private float GetSpeed()
+    {
+        return isRunning ? sprintSpeed : speed;
     }
 }
