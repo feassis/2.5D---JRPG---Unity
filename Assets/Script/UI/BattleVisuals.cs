@@ -10,7 +10,6 @@ public class BattleVisuals : MonoBehaviour
     [SerializeField] private Slider hpSlider;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private Animator animator;
-    [SerializeField] private 
 
     private float curHP;
     private float maxHP;
