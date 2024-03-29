@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,12 +11,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float sprintSpeed = 5;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private LayerMask grassLayer;
+    [SerializeField] private int minSteps;
+    [SerializeField] private int maxSteps;
+    
+    private int stepsInGrass;
 
     private PlayerControls playerControls = null;
     private Rigidbody rb;
     private Vector3 movement;
+    private bool movingInGrass;
+    private float stepTimer;
+    private int stepsToEncounter;
 
     private const string IS_WALK_PARAM = "IsWalking";
+    private const string BATTLESCENE = "BattleScene";
+    private const float TIME_PER_STEP = 0.5f;
     private bool isRunning = false;
 
     private void Awake()
@@ -25,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
         playerControls.Player.Run.performed += ctx => OnRunningPressed();
         playerControls.Player.Run.canceled += ctx => OnRunningCanceled();
+
+        CalculateStpesToNextEncounter();
     }
 
     private void OnRunningCanceled()
@@ -75,6 +88,33 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         rb.MovePosition(transform.position + movement * GetSpeed() * Time.fixedDeltaTime);
+
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1, grassLayer);
+
+        movingInGrass = colliders.Length != 0 && movement != Vector3.zero;
+
+        if(movingInGrass)
+        {
+            stepTimer += Time.fixedDeltaTime;
+
+            if (stepTimer > TIME_PER_STEP)
+            {
+                stepTimer = 0;
+                stepsInGrass++;
+            
+                if(stepsInGrass >= stepsToEncounter)
+                {
+                    stepsInGrass = 0;
+                    CalculateStpesToNextEncounter();
+                    SceneManager.LoadScene(BATTLESCENE);
+                }
+            }
+        }
+    }
+
+    private void CalculateStpesToNextEncounter()
+    {
+        stepsToEncounter = UnityEngine.Random.Range(minSteps, maxSteps);
     }
 
     private float GetSpeed()
