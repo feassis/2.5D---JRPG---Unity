@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4950491235342251335}
+  - component: {fileID: 4499144700448408391}
   m_Layer: 0
   m_Name: SlimeBattleVisual
   m_TagString: Untagged
@@ -33,6 +34,21 @@ Transform:
   - {fileID: 4385429862256324303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4499144700448408391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 741264484810893166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e344eee5e58dc40beaff77158c01e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpSlider: {fileID: 7725711467535816840}
+  levelText: {fileID: 4792648152806649168}
+  animator: {fileID: 5707278884576302701}
 --- !u!1 &6881311146806584807
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +357,11 @@ PrefabInstance:
       propertyPath: animator
       value: 
       objectReference: {fileID: 5707278884576302701}
+    - target: {fileID: 7860266906916772821, guid: e3eff178e435d894fb9083cd80b542f8,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8232844126029993100, guid: e3eff178e435d894fb9083cd80b542f8,
         type: 3}
       propertyPath: m_Name
@@ -357,3 +378,27 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 9005379375830060408}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4792648152806649168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4502298691750731816, guid: e3eff178e435d894fb9083cd80b542f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9005379375830060408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7725711467535816840 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1715508008237700592, guid: e3eff178e435d894fb9083cd80b542f8,
+    type: 3}
+  m_PrefabInstance: {fileID: 9005379375830060408}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

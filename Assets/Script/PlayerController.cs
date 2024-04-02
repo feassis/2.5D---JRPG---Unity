@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private bool movingInGrass;
     private float stepTimer;
     private int stepsToEncounter;
+    private PartyManager partyManager;
 
     private const string IS_WALK_PARAM = "IsWalking";
     private const string BATTLESCENE = "BattleScene";
@@ -38,6 +39,13 @@ public class PlayerController : MonoBehaviour
         playerControls.Player.Run.canceled += ctx => OnRunningCanceled();
 
         CalculateStpesToNextEncounter();
+
+        partyManager = GameObject.FindFirstObjectByType<PartyManager>();
+        if (partyManager.GetPosition() != Vector3.zero)// if we have a position saved
+        {
+            transform.position = partyManager.GetPosition();// move the player
+        }
+
     }
 
     private void OnRunningCanceled()
@@ -105,6 +113,7 @@ public class PlayerController : MonoBehaviour
                 if(stepsInGrass >= stepsToEncounter)
                 {
                     stepsInGrass = 0;
+                    partyManager.SetPosition(transform.position);
                     CalculateStpesToNextEncounter();
                     SceneManager.LoadScene(BATTLESCENE);
                 }

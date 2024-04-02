@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: John
   m_EditorClassIdentifier: 
   MemberName: John
-  StartingLevel: 1
-  BaseHealth: 50
-  BaseStr: 5
+  StartingLevel: 5
+  BaseHealth: 100
+  BaseStr: 15
   BaseInitiative: 5
-  MemberBattleVisualPrefab: {fileID: 0}
+  MemberBattleVisualPrefab: {fileID: 5343766241159174693, guid: 35e9c09be6dde2e4596c98a0d2590faf,
+    type: 3}
   MemberOverworldVisualPrefab: {fileID: 0}

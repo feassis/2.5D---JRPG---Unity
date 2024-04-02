@@ -22,7 +22,7 @@ public class BattleVisuals : MonoBehaviour
 
     private void Start()
     {
-        SetStartingValues(10, 10, 5);
+        
     }
 
     public void SetStartingValues(float currentHP, float maxHP, int level)

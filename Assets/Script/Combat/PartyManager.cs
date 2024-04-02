@@ -9,10 +9,57 @@ public class PartyManager : MonoBehaviour
 
     [SerializeField] private PartyMemberInfo defaultPartyMember;
 
+    public List<PartyMember> GetCurrentParty()
+    {
+        List<PartyMember> aliveParty = new List<PartyMember>();
+        aliveParty = currentParty;
+        for (int i = 0; i < aliveParty.Count; i++)
+        {
+            if (aliveParty[i].CurrentHealth <= 0)
+            {
+                aliveParty.RemoveAt(i);
+            }
+        }
+        return aliveParty;
+
+    }
+
+    private Vector3 playerPosition;
+    private static GameObject instance;
+
+
     private void Awake()
     {
-        AddMemberToPartyByName(defaultPartyMember.MemberName);
+        if (instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this.gameObject;
+            AddMemberToPartyByName(defaultPartyMember.MemberName);
+            AddMemberToPartyByName(defaultPartyMember.MemberName);
+        }
+
+        DontDestroyOnLoad(gameObject);
+
     }
+
+    public void SaveHealth(int partyMember, float health)
+    {
+        currentParty[partyMember].CurrentHealth = health;
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        playerPosition = position;
+    }
+
+    public Vector3 GetPosition()
+    {
+        return playerPosition;
+    }
+
 
     public void AddMemberToPartyByName(string memberName)
     {
@@ -43,8 +90,8 @@ public class PartyMember
     public int Level;
     public float CurrentHealth;
     public float MaxHealth;
-    public float Strength;
-    public float Initiative;
+    public int Strength;
+    public int Initiative;
     public float CurrentExp;
     public float MaxExp;
     public GameObject MemberBattleVisualPrefab;
