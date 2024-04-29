@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private const string BATTLESCENE = "BattleScene";
     private const float TIME_PER_STEP = 0.5f;
     private bool isRunning = false;
+    private Vector3 scale;
 
     private void Awake()
     {
@@ -90,7 +91,7 @@ public class PlayerController : MonoBehaviour
 
         animator.SetBool(IS_WALK_PARAM, movement != Vector3.zero);
 
-        spriteRenderer.flipX = x < 0;
+        spriteRenderer.transform.localScale = x < 0 ? new Vector3(-scale.x, scale.y, scale.z) : new Vector3(scale.x, scale.y, scale.z);
     }
 
     private void FixedUpdate()
@@ -130,4 +131,13 @@ public class PlayerController : MonoBehaviour
     {
         return isRunning ? sprintSpeed : speed;
     }
+
+    public void SetOverworldVisuals(Animator animator, SpriteRenderer spriteRenderer, Vector3 playerScale)
+    {
+        this.animator = animator;
+        this.spriteRenderer = spriteRenderer;
+
+        scale = playerScale;
+    }
+
 }

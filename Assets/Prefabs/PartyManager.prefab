@@ -46,4 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   allMembers:
   - {fileID: 11400000, guid: 878a091cbaf63a84c86b7a39bb9bb52d, type: 2}
+  - {fileID: 11400000, guid: b185b7c4f6d83bc47a0f50c0220fe304, type: 2}
   defaultPartyMember: {fileID: 11400000, guid: 878a091cbaf63a84c86b7a39bb9bb52d, type: 2}

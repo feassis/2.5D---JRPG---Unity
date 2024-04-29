@@ -9,7 +9,14 @@ public class PartyManager : MonoBehaviour
 
     [SerializeField] private PartyMemberInfo defaultPartyMember;
 
+
     public List<PartyMember> GetCurrentParty()
+    {
+        return currentParty;
+    }
+
+
+    public List<PartyMember> GetAliveParty()
     {
         List<PartyMember> aliveParty = new List<PartyMember>();
         aliveParty = currentParty;
@@ -37,7 +44,6 @@ public class PartyManager : MonoBehaviour
         else
         {
             instance = this.gameObject;
-            AddMemberToPartyByName(defaultPartyMember.MemberName);
             AddMemberToPartyByName(defaultPartyMember.MemberName);
         }
 
