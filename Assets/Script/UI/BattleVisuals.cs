@@ -18,7 +18,7 @@ public class BattleVisuals : MonoBehaviour
     private const string LEVEL_ABV = "Lvl: ";
     private const string ATTACK_ANIM_TRIGGER = "attack";
     private const string IS_HIT_ANIM_TRIGGER = "isHit";
-    private const string IS_DEAD_ANIM_TRIGGER = "isDead";
+    private const string IS_DEAD_ANIM_TRIGGER = "IsDead";
 
     private void Start()
     {
@@ -64,7 +64,7 @@ public class BattleVisuals : MonoBehaviour
 
     public void PlayIsDeadAnim()
     {
-        animator.SetTrigger(IS_DEAD_ANIM_TRIGGER);
+        animator.SetBool(IS_DEAD_ANIM_TRIGGER, true);
     }
 
 }
